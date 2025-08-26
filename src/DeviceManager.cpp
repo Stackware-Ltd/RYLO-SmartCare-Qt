@@ -420,9 +420,11 @@ bool DeviceManager::checkBluetoothPermissions()
 
 #if defined(Q_OS_ANDROID)
     m_permOS = UtilsApp::checkMobileBluetoothPermission();
-    m_permLocationBLE = UtilsApp::checkMobileBleLocationPermission();
-    m_permLocationBKG = UtilsApp::checkMobileBackgroundLocationPermission();
     m_permGPS = UtilsApp::isMobileGpsEnabled();
+
+    // New Android Version does not require this
+    m_permLocationBLE = true; // UtilsApp::checkMobileBleLocationPermission();
+    m_permLocationBKG = true; // UtilsApp::checkMobileBackgroundLocationPermission();
 
     m_blePermissions = m_permOS && m_permLocationBLE;
 #endif
